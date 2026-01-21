@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WorkLogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::view('/worklog', 'worklog.index');
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/worklog');
 });
+
+
+Route::get('/worklogs', [WorkLogController::class, 'index']);
