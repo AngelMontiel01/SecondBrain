@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecondBrain</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- Bootstrap 5 CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">SecondBrain</a>
+            <a class="navbar-brand" href="/secondbrain">SecondBrain</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navSB">
                 <span class="navbar-toggler-icon"></span>
@@ -44,6 +45,17 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module"></script>
+
+    {{-- jQuery --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    {{-- PNotify --}}
+    <link rel="stylesheet" href="https://unpkg.com/pnotify@3/dist/pnotify.css">
+    <link rel="stylesheet" href="https://unpkg.com/pnotify@3/dist/pnotify.brighttheme.css">
+
+    <script src="https://unpkg.com/pnotify@3/dist/pnotify.js"></script>
+
     @stack('scripts')
 </body>
 

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkLogController;
 
 /*
@@ -13,11 +12,10 @@ use App\Http\Controllers\WorkLogController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use Illuminate\Support\Facades\Route;
 
-Route::view('/worklog', 'worklog.index');
-Route::get('/', function () {
-    return redirect('/worklog');
+Route::middleware('web')->group(function () {
+    require base_path('routes/web/worklog/worklog.php');
+    require base_path('routes/web/mood/mood.php');
+    require base_path('routes/web/hobby/hobby.php');
 });
-
-
-Route::get('/worklogs', [WorkLogController::class, 'index']);
