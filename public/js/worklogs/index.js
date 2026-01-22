@@ -7,6 +7,10 @@ const minutos = document.getElementById("minutos");
 const idWorklog = document.getElementById("idWorklog");
 const btnGuardar = document.getElementById("btnGuardarWorklog");
 
+document.addEventListener("DOMContentLoaded", () => {
+    cargarWorklogs();
+});
+
 //function para abrir en modo Crear
 window.nuevoWorklog = function () {
     document.querySelector("#modalWorkLog .modal-title").innerText =
@@ -32,8 +36,8 @@ window.editarWorklog = function (id) {
         .then((r) => {
             document.querySelector("#modalWorkLog .modal-title").innerText =
                 "Editar WorkLog";
-            btnGuardar.innerText = "Actualizar Registro";
 
+            btnGuardar.innerText = "Actualizar Registro";
             idWorklog.value = r.idWork;
             fecha.value = r.fecha;
             tipoDia.value = r.tipoDia;
@@ -44,7 +48,7 @@ window.editarWorklog = function (id) {
             horas.value = parseInt(h);
             minutos.value = parseInt(m);
 
-            btnGuardar.onclick = actualizar;
+            btnGuardar.onclick = confirmarActualizar;
 
             new bootstrap.Modal(document.getElementById("modalWorkLog")).show();
         });
@@ -65,28 +69,21 @@ function formatTiempo(t) {
     }
     return `${m} min`;
 }
+function cargarWorklogs() {
+    fetch("/worklogs/getdata")
+        .then((res) => res.json())
+        .then((data) => {
+            const tbody = document.querySelector("#worklog-table tbody");
+            tbody.innerHTML = ""; // limpiar antes
 
-fetch("/worklogs/getdata")
-    .then((res) => res.json())
-    .then((data) => {
-        const tbody = document.querySelector("#worklog-table tbody");
+            data.forEach((row) => {
+                let tipo = Number(row.tipoDia);
+                row.tipoDia = tipo === 1 ? "Día Laboral" : "Fin de semana";
 
-        data.forEach((row) => {
-            let tipo = Number(row.tipoDia);
-            if (tipo === 1) {
-                row.tipoDia = "Día Laboral";
-            } else {
-                row.tipoDia = "Fin de semana";
-            }
+                let auto = Number(row.automatizacion);
+                row.automatizacion = auto === 1 ? "✅" : "❌";
 
-            let auto = Number(row.automatizacion);
-            if (auto === 1) {
-                row.automatizacion = "✅ ";
-            } else {
-                row.automatizacion = "❌ ";
-            }
-
-            tbody.innerHTML += `
+                tbody.innerHTML += `
                 <tr>
                     <td>${row.fecha}</td>
                     <td>${row.tipoDia}</td>
@@ -94,13 +91,14 @@ fetch("/worklogs/getdata")
                     <td>${row.automatizacion}</td>
                     <td>${formatTiempo(row.tiempoReal)}</td>
                     <td>
-                        <button class="btn btn-warning" onclick="editarWorklog(${row.idWork})">Editar</button>
-                        <button class="btn btn-danger" onclick="eliminarWorklog(${row.idWork})">Eliminar</button>
+                        <button class="btn btn-warning btn-sm" onclick="editarWorklog(${row.idWork})">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmarEliminar(${row.idWork})">Eliminar</button>
                     </td>
                 </tr>
                 `;
+            });
         });
-    });
+}
 
 function guardar() {
     fetch("/worklogs/insert", {
@@ -128,8 +126,7 @@ function guardar() {
                     type: "success",
                     delay: 2000,
                 });
-
-                setTimeout(() => location.reload(), 600);
+                cargarWorklogs();
             } else {
                 new PNotify({
                     title: "Error",
@@ -164,15 +161,15 @@ function actualizar() {
             tiempoReal: getTiempoReal(),
         }),
     })
-        .then(res => res.json())
-        .then(r => {
+        .then((res) => res.json())
+        .then((r) => {
             if (r.Exito == 1) {
                 new PNotify({
                     title: "Correcto",
                     text: "WorkLog actualizado correctamente",
                     type: "success",
                 });
-                setTimeout(() => location.reload(), 500);
+                cargarWorklogs();
             }
         });
 }
@@ -186,34 +183,54 @@ function eliminarWorklog(id) {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
         },
-        body: JSON.stringify({
-            id,
-        }),
     })
         .then((res) => res.json())
         .then((r) => {
             if (r.Exito == 1) {
-                new PNotify({
-                    title: "Atención",
+                Swal.fire({
+                    title: "Eliminado",
                     text: "WorkLog eliminado correctamente",
-                    type: "warning",
-                    delay: 2000,
+                    icon: "success",
+                    timer: 1500,
+                    showConfirmButton: false,
                 });
-
-                setTimeout(() => location.reload(), 600);
+                cargarWorklogs();
             } else {
-                new PNotify({
-                    title: "Error",
-                    text: "No se pudo eliminar el WorkLog",
-                    type: "error",
-                });
+                Swal.fire("Error", "No se pudo eliminar el WorkLog", "error");
             }
-        })
-        .catch(() => {
-            new PNotify({
-                title: "Error",
-                text: "Error de conexión",
-                type: "error",
-            });
         });
+}
+
+function confirmarEliminar(id) {
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esta acción no se puede deshacer",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            eliminarWorklog(id);
+        }
+    });
+}
+
+function confirmarActualizar() {
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Se actualizará el registro del WorkLog",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0d6efd",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Sí, actualizar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            actualizar();
+        }
+    });
 }

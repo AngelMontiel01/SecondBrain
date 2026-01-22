@@ -44,7 +44,7 @@ class WorkLogController extends Controller
         }
 
         return response()->json([
-            'id' => $data[0]->idWork,
+            'idWork' => $data[0]->idWork,
             'fecha' => $data[0]->fecha,
             'tipoDia' => $data[0]->tipoDia,
             'actividad' => $data[0]->actividad,

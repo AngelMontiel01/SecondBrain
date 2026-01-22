@@ -49,12 +49,13 @@
 
     {{-- jQuery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+    {{-- SweetAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- PNotify --}}
     <link rel="stylesheet" href="https://unpkg.com/pnotify@3/dist/pnotify.css">
     <link rel="stylesheet" href="https://unpkg.com/pnotify@3/dist/pnotify.brighttheme.css">
-
     <script src="https://unpkg.com/pnotify@3/dist/pnotify.js"></script>
+    <script src="https://unpkg.com/pnotify@3/dist/pnotify.buttons.js"></script>
 
     @stack('scripts')
 </body>
