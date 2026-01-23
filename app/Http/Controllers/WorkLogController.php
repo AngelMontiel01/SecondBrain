@@ -16,12 +16,7 @@ class WorkLogController extends Controller
 
     public function insertar(Request $request)
     {
-        $result = DB::select('
-            DECLARE @EXITO BIT;
-                Exec INSWORK ?, ?, ?, ?, ?,
-                    @EXITO = @EXITO OUTPUT;
-                        SELECT @EXITO AS EXITO;
-        ', [
+        $result = DB::select('EXEC INSWORK ?, ?, ?, ?, ?', [
             $request->input('fecha'),
             $request->input('tipoDia'),
             $request->input('actividad'),
@@ -31,7 +26,6 @@ class WorkLogController extends Controller
 
         return response()->json(['Exito' => $result[0]->EXITO]);
     }
-
     public function getid($id)
     {
         $data = DB::select(
@@ -58,13 +52,7 @@ class WorkLogController extends Controller
 
 
         $result = DB::select("
-            DECLARE @EXITO BIT;
-
-            EXEC dbo.UPWORK
-                ?, ?, ?, ?, ?, ?, @EXITO = @EXITO OUTPUT;
-
-            SELECT @EXITO AS EXITO;
-        ", [
+            EXEC UPWORK ?, ?, ?, ?, ?, ?", [
             $id,
             $request->fecha,
             $request->tipoDia,
@@ -81,11 +69,7 @@ class WorkLogController extends Controller
     public function delete($id)
     {
         $result = DB::select('
-            DECLARE @EXITO BIT;
-                Exec DELWORK ?, 
-                    @EXITO = @EXITO OUTPUT;
-                        SELECT @EXITO AS EXITO;
-        ', [
+                Exec DELWORK ?', [
             $id
         ]);
 
