@@ -97,6 +97,7 @@ function cargarWorklogs() {
                 </tr>
                 `;
             });
+               $('#worklog-table').DataTable();
         });
 }
 
@@ -233,4 +234,9 @@ function confirmarActualizar() {
             actualizar();
         }
     });
+}
+
+
+function datatable(){
+    $('#worklog-table').DataTable();
 }
