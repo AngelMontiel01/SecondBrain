@@ -39,7 +39,7 @@
     </div>
 
     <div class="tabla mt-3">
-        <table class="table table-bordered" id="hobbie-table"></table>
+        <table class="table table-bordered" id="hobbie-table">
         <thead>
             <tr>
                 <th>Juego</th>
@@ -49,9 +49,13 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
+            <tbody>
+            </tbody>
         </table>
 
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/hobbie/hobbie.js') }}"></script>
+@endpush
