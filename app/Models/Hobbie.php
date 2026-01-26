@@ -16,7 +16,7 @@ class Hobbie extends Model
     protected $fillable = [
         'nombreJuego',
         'tipo',
-        'sesion(Minutos)',
+        'sesionMinutos',
         'nota'
     ];
 }

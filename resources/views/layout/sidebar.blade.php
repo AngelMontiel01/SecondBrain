@@ -12,7 +12,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ request()->is('moods*') ? 'active fw-bold' : '' }}" href="/moods">
+        <a class="nav-link {{ request()->is('moods*') ? 'active fw-bold' : '' }}" href="/mood">
             😊 Mood
         </a>
     </li>

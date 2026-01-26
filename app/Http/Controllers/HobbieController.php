@@ -11,16 +11,7 @@ class HobbieController extends Controller
 {
     public function traerDatos()
     {
-        $hobbies = Hobbie::all()->map(function ($h) {
-            return [
-                'idHobbie' => $h->idHobbie,
-                'nombreJuego' => $h->nombreJuego,
-                'tipo' => $h->tipo,
-                'sesionMinutos' => $h->{'sesion(Minutos)'},
-                'nota' => $h->nota,
-            ];
-        });
-
+        $hobbies = Hobbie::all();
         return response()->json($hobbies);
     }
 
@@ -29,7 +20,7 @@ class HobbieController extends Controller
         $result = DB::select('EXEC INSHOBBIE ?,?,?,?', [
             $request->input('nombreJuego'),
             $request->input('tipo'),
-            $request->input('sesion(minutos)'),
+            $request->input('sesionMinutos'),
             $request->input('nota'),
 
         ]);
@@ -46,10 +37,10 @@ class HobbieController extends Controller
         }
 
         return response()->json([
-            'idHobby' => $result[0]->idHobbie,
+            'idHobby' => $result[0]->idHobby,
             'nombreJuego' => $result[0]->nombreJuego,
             'tipo' => $result[0]->tipo,
-            'sesion(minutos)' => $result[0]->sesionMinutos,
+            'sesionMinutos' => $result[0]->sesionMinutos,
             'nota' => $result[0]->nota,
         ]);
     }
