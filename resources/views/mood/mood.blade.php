@@ -27,6 +27,8 @@
                         <option value="4">Alto</option>
                         <option value="5">Muy Alto</option>
                     </select>
+                    <span for="fecha">Fecha</span>
+                    <input type="date" id="fecha" class="form-control mb-2">
                     <span for="nota">Nota</span>
                     <textarea name="nota" id="nota" class="form-control mb-2"></textarea>
                 </div>
@@ -44,6 +46,7 @@
                 <tr>
                     <th>Energia</th>
                     <th>Animo</th>
+                    <th>Fecha</th>
                     <th>Nota</th>
                     <th>Acciones</th>
                 </tr>

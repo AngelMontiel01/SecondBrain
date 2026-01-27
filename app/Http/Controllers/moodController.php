@@ -16,10 +16,12 @@ class moodController extends Controller
 
     public function insertar(Request $request)
     {
-        $result = DB::select('EXEC INSMOOD ?,?,?', [
+        $result = DB::select('EXEC INSMOOD ?,?,?,?', [
             $request->input('energia'),
             $request->input('animo'),
             $request->input('nota'),
+            $request->input('fecha'),
+
         ]);
         return response()->json(['Exito' => $result[0]->EXITO]);
     }
@@ -35,16 +37,20 @@ class moodController extends Controller
             'energia' => $result[0]->energia,
             'animo' => $result[0]->animo,
             'nota' => $result[0]->nota,
+            'fecha' => $result[0]->fecha,
+
         ]);
     }
 
     public function actualizar(Request $request, $id)
     {
-        $result = DB::select("EXEC UPMOOD ?, ?, ?, ?", [
+        $result = DB::select("EXEC UPMOOD ?, ?, ?, ?, ?", [
             $id,
             $request->energia,
             $request->animo,
             $request->nota,
+            $request->fecha,
+
         ]);
 
         return response()->json([

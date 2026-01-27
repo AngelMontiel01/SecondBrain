@@ -2,6 +2,7 @@ const energia = document.getElementById("energy");
 const animo = document.getElementById("animo");
 const nota = document.getElementById("nota");
 const idmood = document.getElementById("idmood");
+const fecha = document.getElementById("fecha");
 const btnMood = document.getElementById("btnGuardarMood");
 
 //cargar tabla de mood
@@ -21,8 +22,9 @@ function cargarMood() {
                     <tr>
                         <td>${row.energia}</td>
                         <td>${row.animo}</td>
+                        <td>${row.fecha}</td>
                         <td>${row.nota}</td>
-                        <td>
+                    <td>
                         <button class="btn btn-warning btn-sm" onclick="editarMood(${row.idMood})">Editar</button>
                         <button class="btn btn-danger btn-sm" onclick="confirmarEliminar(${row.idMood})">Eliminar</button>
                     </td>
@@ -45,6 +47,8 @@ window.nuevomood = function () {
     energia.value = "";
     animo.value = "";
     nota.value = "";
+    fecha.value = "";
+
 
     btnMood.onclick = guardar;
 
@@ -64,6 +68,7 @@ window.editarMood = function (id) {
             energia.value = r.energia;
             animo.value = r.animo;
             nota.value = r.nota;
+            fecha.value = r.fecha;
 
             btnMood.onclick = confirmarActualizar;
 
@@ -85,6 +90,7 @@ function guardar() {
             energia: energia.value,
             animo: animo.value,
             nota: nota.value,
+            fecha: fecha.value,
         }),
     })
         .then((res) => res.json())
@@ -128,6 +134,7 @@ function actualizar() {
             energia: energia.value,
             animo: animo.value,
             nota: nota.value,
+            fecha: fecha.value, 
         }),
     })
         .then((res) => res.json())
@@ -159,8 +166,6 @@ function confirmarActualizar() {
         }
     });
 }
-
-
 
 //Eliminar Mood
 

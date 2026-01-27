@@ -18,6 +18,7 @@ class mood extends Model
     protected $fillable = [
         'energia',
         'animo',
-        'nota'
+        'nota',
+        'fecha'
     ];
 }
