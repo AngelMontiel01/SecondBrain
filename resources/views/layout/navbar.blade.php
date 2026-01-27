@@ -5,7 +5,7 @@
         </button>
 
 
-        <a class="navbar-brand ms-3" href="/secondbrain">
+        <a class="navbar-brand ms-3" href="/">
             SecondBrain
         </a>
     </div>

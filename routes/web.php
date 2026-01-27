@@ -14,8 +14,15 @@ use App\Http\Controllers\WorkLogController;
 */
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::middleware('web')->group(function () {
     require base_path('routes/web/worklog/worklog.php');
     require base_path('routes/web/mood/mood.php');
     require base_path('routes/web/hobby/hobby.php');
+});
+
+
+Route::middleware('web')->group(function () {
+    require base_path('routes/web/dashboard/dashboard.php');
 });
