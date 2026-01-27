@@ -10,7 +10,7 @@ class WorkLogController extends Controller
 {
     public function index()
     {
-        $logs = WorkLog::all();
+        $logs = DB::select('EXEC SELWORK');
         return response()->json($logs);
     }
 

@@ -2,57 +2,48 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use App\Models\Hobbie;
 use Illuminate\Support\Facades\DB;
-
-class HobbieController extends Controller
+use App\Models\mood;
+class moodController extends Controller
 {
     public function traerDatos()
     {
-        $hobbies = DB::select('EXEC SELHOBBY');
-        return response()->json($hobbies);
+        $mood = DB::select('EXEC SELMOOD');
+        return response()->json($mood);
     }
+
 
     public function insertar(Request $request)
     {
-        $result = DB::select('EXEC INSHOBBIE ?,?,?,?', [
-            $request->input('nombreJuego'),
-            $request->input('tipo'),
-            $request->input('sesionMinutos'),
+        $result = DB::select('EXEC INSMOOD ?,?,?', [
+            $request->input('energia'),
+            $request->input('animo'),
             $request->input('nota'),
-
         ]);
-
         return response()->json(['Exito' => $result[0]->EXITO]);
     }
 
     public function traerid($id)
     {
-        $result = DB::select('Exec SELHOBBIEID ?', [$id]);
-
+        $result = DB::select('Exec SELMOODID ?', [$id]);
         if (count($result) === 0) {
             return response()->json([]);
         }
-
         return response()->json([
-            'idHobby' => $result[0]->idHobby,
-            'nombreJuego' => $result[0]->nombreJuego,
-            'tipo' => $result[0]->tipo,
-            'sesionMinutos' => $result[0]->sesionMinutos,
+            'idMood' => $result[0]->idMood,
+            'energia' => $result[0]->energia,
+            'animo' => $result[0]->animo,
             'nota' => $result[0]->nota,
         ]);
     }
 
     public function actualizar(Request $request, $id)
     {
-        $result = DB::select("
-            EXEC UPHOBBIE ?, ?, ?, ?,?", [
+        $result = DB::select("EXEC UPMOOD ?, ?, ?, ?", [
             $id,
-            $request->nombreJuego,
-            $request->tipo,
-            $request->sesionMinutos,
+            $request->energia,
+            $request->animo,
             $request->nota,
         ]);
 
@@ -63,7 +54,7 @@ class HobbieController extends Controller
 
     public function eliminar($id)
     {
-        $result = DB::select('Exec DELHOBBIE ?', [$id]);
+        $result = DB::select('Exec DELMOOD ?', [$id]);
 
         return response()->json(['Exito' => $result[0]->EXITO]);
     }
