@@ -12,8 +12,9 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
 
-    public function data(){
-        $data= DB::select('EXEC DASH_Worklog_Hoy');
+    public function data()
+    {
+        $data = DB::select('EXEC DASH_Worklog_Hoy');
 
         //Regresar un objeto aun que no haya registro
 
@@ -24,4 +25,10 @@ class DashboardController extends Controller
             'porcentajeAuto' => 0
         ]);
     }
+    public function moodVsWork()
+    {
+        $data = DB::select('EXEC DASH_Mood_vs_Work');
+        return response()->json($data);
+    }
+
 }
