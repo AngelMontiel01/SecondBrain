@@ -31,4 +31,9 @@ class DashboardController extends Controller
         return response()->json($data);
     }
 
+    public function hobbieImpact()
+    {
+        $data = DB::select('EXEC DASH_Hobby_Impacto');
+        return response()->json($data);
+    }
 }

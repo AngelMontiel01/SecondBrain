@@ -41,11 +41,29 @@
         </div>
     </div>
 
-    <div class="row g-3">
-        <div class="card mt-4">
-            <div class="card-body">
-                <h5>Mood vs Trabajo</h5>
-                <canvas id="moodWorkChart" height="120"></canvas>
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Mood vs Trabajo</h5>
+                    <canvas id="moodWorkChart" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-bg-primary mb-3">
+                <div class="card-body">
+                    <h6>Día con Hobby</h6>
+                    <h4 id="hobbieday">0 min</h4>
+                </div>
+            </div>
+
+            <div class="card text-bg-secondary">
+                <div class="card-body">
+                    <h6>Día sin Hobby</h6>
+                    <h4 id="nohobbie">0 min</h4>
+                </div>
             </div>
         </div>
     </div>
@@ -77,8 +95,7 @@
                 new Chart(ctx, {
                     data: {
                         labels,
-                        datasets: [
-                            {
+                        datasets: [{
                                 type: 'line',
                                 label: 'Energía',
                                 data: energia,
@@ -96,7 +113,7 @@
                                 backgroundColor: 'rgb(191, 36, 36,1)',
                                 borderColor: 'rgb(191, 36, 36,1)',
                             },
-                            
+
                         ]
                     },
                     options: {
@@ -125,6 +142,29 @@
                         }
                     }
                 });
+            });
+
+        fetch('/dashboard/hobbyImpact')
+            .then(res => res.json())
+            .then(data => {
+
+                // valores por defecto
+                let conHobby = 0;
+                let sinHobby = 0;
+
+                data.forEach(r => {
+                    if (r.tieneHobby == 1) {
+                        conHobby = Math.round(r.promedioMinutos);
+                    } else {
+                        sinHobby = Math.round(r.promedioMinutos);
+                    }
+                });
+
+                document.getElementById('hobbieday').innerText =
+                    conHobby + ' min';
+
+                document.getElementById('nohobbie').innerText =
+                    sinHobby + ' min';
             });
     </script>
 @endpush
