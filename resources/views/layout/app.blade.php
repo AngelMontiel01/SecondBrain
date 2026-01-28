@@ -76,6 +76,10 @@
     <script src="https://unpkg.com/pnotify@3/dist/pnotify.buttons.js"></script>
     {{-- DataTable --}}
     <script src="https://cdn.datatables.net/2.3.6/js/dataTables.js"></script>
+
+    {{-- charts.js --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     @stack('scripts')
 </body>
 
