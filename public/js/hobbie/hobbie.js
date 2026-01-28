@@ -2,6 +2,7 @@ const juego = document.getElementById("game");
 const tipo = document.getElementById("tipoJuego");
 const sesion = document.getElementById("sesion");
 const nota = document.getElementById("nota");
+const fecha = document.getElementById("fecha");
 const idhobbie = document.getElementById("idHobbie");
 const btn = document.getElementById("btnGuardarHobbie");
 
@@ -23,12 +24,12 @@ function cargarHobbie() {
                         <td>${row.nombreJuego}</td>
                         <td>${row.tipo}</td>
                         <td>${row.sesionMinutos}</td>
+                        <td>${row.fecha}</td>
                         <td>${row.nota}</td>
                         <td>
                         <button class="btn btn-warning btn-sm" onclick="editarHobbie(${row.idHobby})"">Editar</button>
                         <button class="btn btn-danger btn-sm" onclick="confirmarEliminar(${row.idHobby})">Eliminar</button>
                     </td>
-
                     </tr>
                 `;
             });
@@ -48,6 +49,7 @@ window.nuevoHobbie = function () {
     juego.value = "";
     tipo.value = 0;
     sesion.value = 0;
+    fecha.value = "";
     nota.value = "";
 
     btn.onclick = guardar;
@@ -69,6 +71,7 @@ window.editarHobbie = function (id) {
             juego.value = r.nombreJuego;
             tipo.value = r.tipo;
             sesion.value = r.sesionMinutos;
+            fecha.value = r.fecha;
             nota.value = r.nota;
 
             btn.onclick = confirmarActualizar;
@@ -91,6 +94,7 @@ function guardar() {
             nombreJuego: juego.value,
             tipo: tipo.value,
             sesionMinutos: sesion.value,
+            fecha: fecha.value,
             nota: nota.value,
         }),
     })
@@ -135,6 +139,7 @@ function actualizar() {
             nombreJuego: juego.value,
             tipo: tipo.value,
             sesionMinutos: sesion.value,
+            fecha: fecha.value,
             nota: nota.value,
         }),
     })

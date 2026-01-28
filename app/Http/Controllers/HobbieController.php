@@ -17,12 +17,12 @@ class HobbieController extends Controller
 
     public function insertar(Request $request)
     {
-        $result = DB::select('EXEC INSHOBBIE ?,?,?,?', [
+        $result = DB::select('EXEC INSHOBBIE ?,?,?,?,?', [
             $request->input('nombreJuego'),
             $request->input('tipo'),
             $request->input('sesionMinutos'),
+            $request->input('fecha'),
             $request->input('nota'),
-
         ]);
 
         return response()->json(['Exito' => $result[0]->EXITO]);
@@ -41,6 +41,7 @@ class HobbieController extends Controller
             'nombreJuego' => $result[0]->nombreJuego,
             'tipo' => $result[0]->tipo,
             'sesionMinutos' => $result[0]->sesionMinutos,
+            'fecha' => $result[0]->fecha,
             'nota' => $result[0]->nota,
         ]);
     }
@@ -48,11 +49,12 @@ class HobbieController extends Controller
     public function actualizar(Request $request, $id)
     {
         $result = DB::select("
-            EXEC UPHOBBIE ?, ?, ?, ?,?", [
+            EXEC UPHOBBIE ?, ?, ?, ?,?,?", [
             $id,
             $request->nombreJuego,
             $request->tipo,
             $request->sesionMinutos,
+            $request->fecha,
             $request->nota,
         ]);
 

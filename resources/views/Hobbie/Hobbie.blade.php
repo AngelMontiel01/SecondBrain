@@ -27,6 +27,8 @@
                     </select>
                     <span for="sesion">Sesion</span>
                     <input type="number" id="sesion" class="form-control mb-2">
+                    <span for="fecha">Fecha</span>
+                    <input type="date" id="fecha" class="form-control mb-2">
                     <span for="nota">Nota</span>
                     <textarea name="nota" id="nota" class="form-control mb-2"></textarea>
                 </div>
@@ -45,6 +47,7 @@
                 <th>Juego</th>
                 <th>Tipo de Juego</th>
                 <th>Sesion</th>
+                <th>Fecha</th>
                 <th>Nota</th>
                 <th>Acciones</th>
             </tr>
