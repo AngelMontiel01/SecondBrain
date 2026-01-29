@@ -36,4 +36,11 @@ class DashboardController extends Controller
         $data = DB::select('EXEC DASH_Hobby_Impacto');
         return response()->json($data);
     }
+    public function insight()
+    {
+        return response()->json(
+            DB::selectOne('EXEC DASH_INSIGHT')
+        );
+
+    }
 }

@@ -1,9 +1,24 @@
 @extends('layout.app')
 
 @section('content')
-    <h3 class="mb-4">Dashboard</h3>
+    <h3 class="mb-4">
+        Dashboard {{ now()->locale('es')->isoFormat('ddd, D MMM YYYY') }}
+    </h3>
+    
 
-    <div class="row g-3 text-center">
+    {{-- Resumen del Día --}}
+    <div class="row mt-4 p-3">
+        <div class="card" id="insightCard" style="background-color:#d8dee1">
+            <div class="card-title text-center p-2 ">
+                <span style="font-size: 25px; font-weight: bold;">Resumen del Día</span>
+            </div>
+            <div class="card-body text-center ">
+                <span id="insightTexto" class="p-2" style="font-size: 30px"></span>
+            </div>
+        </div>
+    </div>
+    {{-- Resumen de Registros Automatizados --}}
+    <div class="row g-3 text-center p-4">
         <div class="col-md-3">
             <div class="card text-bg-primary">
                 <div class="card-body">
@@ -40,8 +55,8 @@
             </div>
         </div>
     </div>
-
-    <div class="row mt-4">
+    {{-- Gráficos y Comparativas --}}
+    <div class="row mt-4 p-4">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
@@ -68,103 +83,6 @@
         </div>
     </div>
 @endsection
-
 @push('scripts')
-    <script>
-        fetch('/dashboard/data')
-            .then(res => res.json())
-            .then(d => {
-                document.getElementById('minutosHoy').innerText = d.minutosHoy + ' min';
-                document.getElementById('porcentajeAuto').innerText = d.porcentajeAuto + '%';
-                document.getElementById('totalRegistros').innerText = d.totalRegistros;
-                document.getElementById('totalAutomatizados').innerText = d.totalAutomatizados;
-            });
-
-        fetch('/dashboard/mood-work')
-            .then(res => res.json())
-            .then(data => {
-
-                const labels = data.map(d => d.fecha);
-                const minutos = data.map(d => d.minutosTotales);
-                const energia = data.map(d => d.energia);
-
-                const ctx = document
-                    .getElementById('moodWorkChart')
-                    .getContext('2d');
-
-                new Chart(ctx, {
-                    data: {
-                        labels,
-                        datasets: [{
-                                type: 'line',
-                                label: 'Energía',
-                                data: energia,
-                                tension: 0.3,
-                                yAxisID: 'y1',
-                                backgroundColor: 'blue',
-                                borderColor: 'blue',
-
-                            },
-                            {
-
-                                type: 'bar',
-                                label: 'Minutos trabajados',
-                                data: minutos,
-                                backgroundColor: 'rgb(191, 36, 36,1)',
-                                borderColor: 'rgb(191, 36, 36,1)',
-                            },
-
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Minutos'
-                                }
-                            },
-                            y1: {
-                                beginAtZero: true,
-                                min: 0,
-                                max: 100,
-                                position: 'right',
-                                title: {
-                                    display: true,
-                                    text: 'Energía'
-                                },
-                                grid: {
-                                    drawOnChartArea: false
-                                }
-                            }
-                        }
-                    }
-                });
-            });
-
-        fetch('/dashboard/hobbyImpact')
-            .then(res => res.json())
-            .then(data => {
-
-                // valores por defecto
-                let conHobby = 0;
-                let sinHobby = 0;
-
-                data.forEach(r => {
-                    if (r.tieneHobby == 1) {
-                        conHobby = Math.round(r.promedioMinutos);
-                    } else {
-                        sinHobby = Math.round(r.promedioMinutos);
-                    }
-                });
-
-                document.getElementById('hobbieday').innerText =
-                    conHobby + ' min';
-
-                document.getElementById('nohobbie').innerText =
-                    sinHobby + ' min';
-            });
-    </script>
+    <script src="{{ asset('js/dash/dashboard.js') }}"></script>
 @endpush
