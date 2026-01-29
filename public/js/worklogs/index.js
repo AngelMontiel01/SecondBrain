@@ -11,6 +11,21 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarWorklogs();
 });
 
+function datatable() {
+    if ($.fn.DataTable.isDataTable("#worklog-table")) {
+        $("#worklog-table").DataTable().destroy();
+    }
+
+    $("#worklog-table").DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 5,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+        },
+    });
+}
+
 //function para abrir en modo Crear
 window.nuevoWorklog = function () {
     document.querySelector("#modalWorkLog .modal-title").innerText =
@@ -97,7 +112,7 @@ function cargarWorklogs() {
                 </tr>
                 `;
             });
-               $('#worklog-table').DataTable();
+            datatable();
         });
 }
 
@@ -234,9 +249,4 @@ function confirmarActualizar() {
             actualizar();
         }
     });
-}
-
-
-function datatable(){
-    $('#worklog-table').DataTable();
 }

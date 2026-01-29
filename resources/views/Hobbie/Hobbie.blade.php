@@ -39,23 +39,26 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="tabla mt-3">
+                <table class="table table-bordered" id="hobbie-table">
+                    <thead>
+                        <tr>
+                            <th>Juego</th>
+                            <th>Tipo de Juego</th>
+                            <th>Sesion</th>
+                            <th>Fecha</th>
+                            <th>Nota</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
 
-    <div class="tabla mt-3">
-        <table class="table table-bordered" id="hobbie-table">
-        <thead>
-            <tr>
-                <th>Juego</th>
-                <th>Tipo de Juego</th>
-                <th>Sesion</th>
-                <th>Fecha</th>
-                <th>Nota</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-            <tbody>
-            </tbody>
-        </table>
-
+            </div>
+        </div>
     </div>
 @endsection
 

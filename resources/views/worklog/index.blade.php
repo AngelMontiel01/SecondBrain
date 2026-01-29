@@ -50,21 +50,24 @@
             </div>
         </div>
     </div>
-    
-    <div class="tabla mt-3">
-        <table class="table table-bordered" id="worklog-table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Tipo Día</th>
-                    <th>Actividad</th>
-                    <th>Automatización</th>
-                    <th>Tiempo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <div class="tabla mt-3">
+                <table class="table table-bordered" id="worklog-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo Día</th>
+                            <th>Actividad</th>
+                            <th>Automatización</th>
+                            <th>Tiempo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection
 

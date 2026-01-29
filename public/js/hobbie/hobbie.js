@@ -11,6 +11,20 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarHobbie();
 });
 
+function datatable() {
+    if ($.fn.DataTable.isDataTable("#hobbie-table")) {
+        $("#hobbie-table").DataTable().destroy();
+    }
+
+    $("#hobbie-table").DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 5,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+        },
+    });
+}
 function cargarHobbie() {
     fetch("/hobbies/getdata")
         .then((res) => res.json())
@@ -33,7 +47,7 @@ function cargarHobbie() {
                     </tr>
                 `;
             });
-            $("#hobbie-table").DataTable();
+            datatable();
         });
 }
 
@@ -64,7 +78,7 @@ window.editarHobbie = function (id) {
         .then((r) => {
             document.querySelector("#modalHobbie .modal-title").innerText =
                 "Editar Hobbie";
-                console.log(r);
+            console.log(r);
 
             btn.innerText = "Actualizar Hobbie";
             idhobbie.value = r.idHobby;
@@ -172,8 +186,6 @@ function confirmarActualizar() {
         }
     });
 }
-
-
 
 //Eliminar Hobbie
 

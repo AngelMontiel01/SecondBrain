@@ -10,6 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarMood();
 });
 
+function datatable() {
+    if ($.fn.DataTable.isDataTable("#mood-table")) {
+        $("#mood-table").DataTable().destroy();
+    }
+
+    $("#mood-table").DataTable({
+        responsive: true,
+        autoWidth: false,
+        pageLength: 5,
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+        },
+    });
+}
+
 function cargarMood() {
     fetch("/mood/getdata")
         .then((res) => res.json())
@@ -32,7 +47,7 @@ function cargarMood() {
                     </tr>
                 `;
             });
-            $("#mood-table").DataTable();
+            datatable();
         });
 }
 
@@ -48,7 +63,6 @@ window.nuevomood = function () {
     animo.value = "";
     nota.value = "";
     fecha.value = "";
-
 
     btnMood.onclick = guardar;
 
@@ -134,7 +148,7 @@ function actualizar() {
             energia: energia.value,
             animo: animo.value,
             nota: nota.value,
-            fecha: fecha.value, 
+            fecha: fecha.value,
         }),
     })
         .then((res) => res.json())

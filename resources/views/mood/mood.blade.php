@@ -39,23 +39,27 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="tabla mt-3">
+                <table class="table table-bordered" id="mood-table">
+                    <thead>
+                        <tr>
+                            <th>Energia</th>
+                            <th>Animo</th>
+                            <th>Fecha</th>
+                            <th>Nota</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
 
-    <div class="tabla mt-3">
-        <table class="table table-bordered" id="mood-table">
-            <thead>
-                <tr>
-                    <th>Energia</th>
-                    <th>Animo</th>
-                    <th>Fecha</th>
-                    <th>Nota</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
+            </div>
+        </div>
     </div>
+
     @push('scripts')
         <script src="{{ asset('js/mood/mood.js') }}"></script>
     @endpush

@@ -19,6 +19,7 @@
 
 
     @stack('styles')
+
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -50,6 +51,9 @@
     {{-- DataTables --}}
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    {{-- SweetAlert2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- Scripts por vista --}}
     @stack('scripts')
