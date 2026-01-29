@@ -1,12 +1,5 @@
-<nav class="navbar navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-            ☰
-        </button>
-
-
-        <a class="navbar-brand ms-3" href="/">
-            SecondBrain
-        </a>
+        <span class="navbar-brand">Dashboard</span>
     </div>
 </nav>

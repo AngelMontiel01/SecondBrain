@@ -1,86 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecondBrain</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
 
-    {{-- Bootstrap 5 CDN --}}
+
+    {{-- Soft UI CSS --}}
+    <link href="{{ asset('assets/css/soft-ui-dashboard.css') }}" rel="stylesheet">
+
+    {{-- Bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.6/css/dataTables.dataTables.css" />
-  
-    
-    
-    <style>
-        #sidebar {
-            min-height: 100vh;
-            border-right: 1px solid #dee2e6;
-            background-color: #dee2e6 !important;
-        }
-        
-        #sidebar .nav-link {
-            color: #333;
-        }
-        
-        #sidebar .nav-link.active {
-            background-color: #0d6efd;
-            color: #fff;
-            border-radius: 0.375rem;
-        }
-        </style>
+
+    {{-- DataTables CSS --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+
+    @stack('styles')
 </head>
 
-<body>
-    
-    @include('layout.navbar')
-    
-    <div class="container-fluid">
-        <div class="row">
+<body class="g-sidenav-show bg-gray-100">
 
-            {{-- SIDEBAR --}}
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title">SecondBrain</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body">
-                    @include('layout.sidebar')
-                </div>
-            </div>
-            
-            
-            
-            {{-- CONTENT --}}
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4 container-fluid">
-                @yield('content')
-            </main>
-            
+    {{-- SIDEBAR --}}
+    @include('layout.sidebar')
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+
+        {{-- NAVBAR --}}
+        @include('layout.navbar')
+
+        <div class="container-fluid py-4">
+            @yield('content')
         </div>
-    </div>
-    
-    {{-- Scripts --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    {{-- jQuery --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
-    {{-- SweetAlert --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    {{-- PNotify --}}
-    <link rel="stylesheet" href="https://unpkg.com/pnotify@3/dist/pnotify.css">
-    <link rel="stylesheet" href="https://unpkg.com/pnotify@3/dist/pnotify.brighttheme.css">
-    <script src="https://unpkg.com/pnotify@3/dist/pnotify.js"></script>
-    <script src="https://unpkg.com/pnotify@3/dist/pnotify.buttons.js"></script>
-    {{-- DataTable --}}
-    <script src="https://cdn.datatables.net/2.3.6/js/dataTables.js"></script>
 
-    {{-- charts.js --}}
+    </main>
+
+    {{-- JS CORE --}}
+    <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/soft-ui-dashboard.min.js') }}"></script>
+
+    {{-- Chart.js --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- jQuery (DataTables lo necesita) --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+    {{-- DataTables --}}
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    {{-- Scripts por vista --}}
     @stack('scripts')
+
 </body>
 
 </html>

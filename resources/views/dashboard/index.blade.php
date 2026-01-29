@@ -4,7 +4,7 @@
     <h3 class="mb-4">
         Dashboard {{ now()->locale('es')->isoFormat('ddd, D MMM YYYY') }}
     </h3>
-    
+
 
     {{-- Resumen del Día --}}
     <div class="row mt-4 p-3">
